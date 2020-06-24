@@ -8,6 +8,7 @@ const util = require('util');
 const fs = require('fs');
 const Detail = require('./objects');
 
+
 const uri = 'covid-19.by.state.json';
 
 app.get('/', function(req, res) {  

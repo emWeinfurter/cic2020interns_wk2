@@ -8,18 +8,19 @@ const util = require('util');
 const fs = require('fs');
 const Summary = require('./objects');
 
+//uri for the JSON file
 const uri = 'covid-19.by.state.json';
 
 app.get('/', function(req, res) {
     //reading sample json  
-    const json = fs.readFileSync(util.format('./%s', uri));
-    const output = JSON.parse(json);
-    const asOfDate = output.asOfDate;    
+    const json = fs.readFileSync(util.format('./%s', uri));     //reads file
+    const output = JSON.parse(json);                            //parses file to output 
+    const asOfDate = output.asOfDate;                           //output.asOfDate
     const summary = output.summary;    
     const detail = output.detail;
 
     //creating class from json response
-    let object = new Summary(
+    let object = new Summary(                                   //new Summary object
         summary.totalCases,
         summary.totalDeath,
         summary.casesInLast7Days,
