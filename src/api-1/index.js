@@ -21,11 +21,7 @@ app.get('/totalrecovered', async function(req, res) {
             console.log(error);
         });
     objectArr.sort((a, b) => (a.TotalRecovered < b.TotalRecovered) ? 1 : -1);
-    let outArr = [];
-    for (var i = 0; i <=10; i++){
-        outArr[i] = objectArr[i].Country;
-    }
-    res.send(outArr);
+    res.send(objectArr.slice(0, 10));
 });
 
 const server = app.listen(8081, function () {
