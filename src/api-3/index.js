@@ -28,6 +28,10 @@ app.get('/differenceconfirmed', async function(req, res) {
     objectArr.sort((a, b) => (a.TotalConfirmed > b.TotalConfirmed) ? 1 : -1);
     percentage.push(objectArr[0]);
 
+    let percent = Math.abs(percentage[0].TotalConfirmed - percentage[1].TotalConfirmed);
+    percent /= ((percentage[0].TotalConfirmed + percentage[1].TotalConfirmed) / 2);
+    percent *= 100;
+    percentage.push(percent);
     res.send(percentage);
 });
 
