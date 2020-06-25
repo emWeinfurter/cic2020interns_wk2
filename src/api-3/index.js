@@ -1,3 +1,5 @@
+//npm install express axios
+
 'use strict';
 const express = require('express');  
 const app = express(); 
@@ -31,7 +33,10 @@ app.get('/differenceconfirmed', async function(req, res) {
     let percent = Math.abs(percentage[0].TotalConfirmed - percentage[1].TotalConfirmed);
     percent /= ((percentage[0].TotalConfirmed + percentage[1].TotalConfirmed) / 2);
     percent *= 100;
-    percentage.push(percent);
+
+    const difference = {'PercentDifference': percent};
+    percentage.push(difference);
+
     res.send(percentage);
 });
 
