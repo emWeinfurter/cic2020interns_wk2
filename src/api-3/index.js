@@ -20,8 +20,15 @@ app.get('/differenceconfirmed', async function(req, res) {
         .catch(error => {
             console.log(error);
         });
-    objectArr.sort((a, b) => (a.NewConfirmed > b.NewConfirmed) ? 1 : -1);
-    res.send(objectArr.slice(0, 10));
+        
+    let percentage = [];
+    objectArr.sort((a,b) => (a.TotalConfirmed < b.TotalConfirmed) ? 1 : -1);
+    percentage.push(objectArr[0]);
+
+    objectArr.sort((a, b) => (a.TotalConfirmed > b.TotalConfirmed) ? 1 : -1);
+    percentage.push(objectArr[0]);
+
+    res.send(percentage);
 });
 
 const server = app.listen(8081, function () {
