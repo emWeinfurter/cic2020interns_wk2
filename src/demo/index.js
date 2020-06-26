@@ -66,19 +66,21 @@ app.get('/differenceconfirmed', async function(req, res) {
         .catch(error => {
             console.log(error);
         });
+    let n = objectArr.length-1;
         
     let percentage = [];
     objectArr.sort((a,b) => (a.TotalConfirmed < b.TotalConfirmed) ? 1 : -1);
-    percentage.push(objectArr[0]);
 
-    objectArr.sort((a, b) => (a.TotalConfirmed > b.TotalConfirmed) ? 1 : -1);
-    percentage.push(objectArr[0]);
-
-    let percent = Math.abs(percentage[0].TotalConfirmed - percentage[1].TotalConfirmed);
-    percent /= ((percentage[0].TotalConfirmed + percentage[1].TotalConfirmed) / 2);
+    //Percet Difference Math
+    let percent = Math.abs(objectArr[0].TotalConfirmed - objectArr[n].TotalConfirmed);
+    percent /= ((objectArr[0].TotalConfirmed + objectArr[n].TotalConfirmed) / 2);
     percent *= 100;
 
-    const difference = {'PercentDifference': percent};
+    const difference = {
+        'CountryWithHighest': objectArr[0].Country,
+        'CountryWithLowest': objectArr[n].Country,
+        'PercentDifference': percent,
+    };
     percentage.push(difference);
 
     res.send(percentage);
